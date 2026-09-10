@@ -1,0 +1,18 @@
+#!/bin/bash
+# Ülesanne 3 - väljastab kuupäeva ja kellaajaga seotud info ning kalendri.
+# Kasutatud: date, cal, tr, sed, uptime
+
+echo "--- Kuupäev ja kellaaeg ---"
+echo "Kellaaeg: $(date +%H:%M:%S)"
+echo "Kuupäev: $(date +%d.%m.%Y)"
+echo "Nädalapäev: $(date +%A)"
+echo "Kuu: $(date +%B | tr '[:lower:]' '[:upper:]')"
+echo "Päev aasta algusest: $(date +%j | sed 's/^0*//')"
+echo "Nädala number: $(date +%V)"
+echo "Ajavöönd: $(date '+%Z (UTC%z)')"
+echo "Unix-aeg: $(date +%s)"
+echo "Süsteem on töötanud: $(uptime -p)"
+
+echo
+echo "--- Jooksva kuu kalender ---"
+cal
