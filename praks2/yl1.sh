@@ -1,7 +1,8 @@
 #!/bin/bash
-# Ülesanne 1 - väljastab tervituse "Tere, Kasutajanimi!"
+# Ülesanne 2 - väljastab tervituse sisselogitud kasutaja nimega,
+# suure algustähega: kasutaja oliver -> "Tere, Oliver!"
 
 echo -n "Tere, "
-NIMI="Kasutajanimi"
-echo -n "$NIMI"
+NIMI=$(whoami)
+echo -n "${NIMI^}"
 echo "!"
