@@ -16,3 +16,19 @@ echo "Süsteem on töötanud: $(uptime -p)"
 echo
 echo "--- Jooksva kuu kalender ---"
 cal
+
+# Lisatud: mitu päeva on aasta lõpuni.
+# 10# sunnib arvu kümnendsüsteemi, muidu tõlgendaks bash ees oleva nulliga
+# päevanumbrit (nt 087) kaheksandsüsteemis ja viskaks vea.
+LOPP=$(date -d "31 dec" +%j)
+TANA=$(date +%j)
+echo
+echo "Aasta lõpuni on jäänud: $((10#$LOPP - 10#$TANA)) päeva"
+
+# Lisatud: kalender koos nädalanumbritega ja eelmine/järgmine kuu kõrvuti
+echo
+echo "--- Kalender nädalanumbritega ---"
+cal -w
+echo
+echo "--- Eelmine, jooksev ja järgmine kuu ---"
+cal -3
