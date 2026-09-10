@@ -28,7 +28,7 @@ echo "Aasta lõpuni on jäänud: $((10#$LOPP - 10#$TANA)) päeva"
 # Lisatud: kalender koos nädalanumbritega ja eelmine/järgmine kuu kõrvuti
 echo
 echo "--- Kalender nädalanumbritega ---"
-cal -w
+ncal -bw
 echo
 echo "--- Eelmine, jooksev ja järgmine kuu ---"
 cal -3
