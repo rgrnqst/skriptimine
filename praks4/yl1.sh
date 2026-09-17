@@ -1,0 +1,10 @@
+#!/bin/bash
+# Skript küsib kasutajalt täisarvu ja väljastab, kas see on paaris või paaritu
+echo -n "Sisesta suvaline täisarv: "
+read arv
+if [ $(( arv % 2 )) -eq 0 ]
+then
+    echo "Antud arv on paaris"
+else
+    echo "Antud arv on paaritu"
+fi
