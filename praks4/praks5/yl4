@@ -1,0 +1,17 @@
+#!/bin/bash
+# yl4 - loeb tunni süsteemi kellast ja tervitab kasutajat nimepidi
+tund=$(date +%H)
+tund=${tund#0}
+nimi=$(whoami)
+if test $tund -ge 6 -a $tund -lt 12
+then
+    echo "Tere hommikust, $nimi!"
+elif test $tund -ge 12 -a $tund -lt 18
+then
+    echo "Tere päevast, $nimi!"
+elif test $tund -ge 18 -a $tund -lt 22
+then
+    echo "Tere õhtust, $nimi!"
+else
+    echo "Head ööd, $nimi!"
+fi
