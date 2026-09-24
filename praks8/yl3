@@ -1,0 +1,34 @@
+#!/bin/bash
+# yl3 - loto: genereerib 5 erinevat juhuslikku arvu vahemikus 1-50
+# massiive ei kasutata, juba loodud numbrid hoitakse ajutises failis
+ajutine=$(mktemp)
+tulemusfail="loto_tulemused.txt"
+# ajutine fail kustutatakse skripti lõppedes
+trap 'rm -f "$ajutine"' EXIT
+while (( $(wc -l < "$ajutine") < 5 ))
+do
+number=$(( RANDOM % 50 + 1 ))
+# grep -x otsib täpset rida - lisame numbri ainult siis, kui seda veel pole
+if ! grep -qx "$number" "$ajutine"
+then
+echo "$number" >> "$ajutine"
+fi
+done
+aeg=$(date "+%d.%m.%Y %H:%M:%S")
+numbrid=$(sort -n "$ajutine" | paste -sd " ")
+tulemus="$aeg Loto numbrid: $numbrid"
+read -p "Kuva tulemus terminalis (1) või salvesta faili (2)? " valik
+case $valik in
+1)
+echo "$tulemus"
+;;
+2)
+# >> lisab faili lõppu, varasemad tulemused jäävad alles
+echo "$tulemus" >> "$tulemusfail"
+echo "Tulemus lisati faili $tulemusfail"
+;;
+*)
+echo "Vigane valik - vali 1 või 2"
+exit 1
+;;
+esac
