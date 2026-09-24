@@ -1,0 +1,16 @@
+#!/bin/bash
+# yl4 - väljastab kolmnurga: tärnide arv reas võrdub rea numbriga
+read -p "Sisesta ridade arv: " read_arv
+if ! [[ $read_arv =~ ^[1-9][0-9]*$ ]]
+then
+    echo "Vigane sisend - sisesta positiivne täisarv"
+    exit 1
+fi
+for (( i = 1; i <= read_arv; i++ ))
+do
+    for (( j = 1; j <= i; j++ ))
+    do
+        echo -n "* "
+    done
+    echo ""
+done
