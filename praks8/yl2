@@ -1,0 +1,10 @@
+#!/bin/bash
+# yl2 - väljastab iseenda lähtekoodi tagurpidi
+# $0 viitab käivitatud skripti enda failile
+# tac pöörab ridade järjekorra, rev pöörab märgid rea sees
+if ! [ -r "$0" ]
+then
+echo "Ei leia skripti faili $0"
+exit 1
+fi
+tac "$0" | rev
