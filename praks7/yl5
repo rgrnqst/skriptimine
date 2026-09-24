@@ -1,0 +1,21 @@
+#!/bin/bash
+# yl5 - väljastab kujundi: igas reas enne o-tähed ja siis tärnid,
+# tärnide arv võrdub rea numbriga, o-tähtede arv on ülejäänud kohad
+read -p "Sisesta ridade arv: " read_arv
+if ! [[ $read_arv =~ ^[1-9][0-9]*$ ]]
+then
+    echo "Vigane sisend - sisesta positiivne täisarv"
+    exit 1
+fi
+for (( i = 1; i <= read_arv; i++ ))
+do
+    for (( j = 1; j <= read_arv - i; j++ ))
+    do
+        echo -n "o "
+    done
+    for (( j = 1; j <= i; j++ ))
+    do
+        echo -n "* "
+    done
+    echo ""
+done
