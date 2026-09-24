@@ -1,0 +1,51 @@
+#!/bin/bash
+# yl4 - lahendab ruutvõrrandi Ax^2 + Bx + C = 0
+# kordajad antakse käsurea argumentidena, näiteks: ./yl4 1 -3 2
+# printf vajab kümnendpunkti, mitte koma (nt et_EE lokaadis)
+export LC_NUMERIC=C
+# bc ei murra pikki tulemusi mitmele reale
+export BC_LINE_LENGTH=0
+# bc peab olema paigaldatud
+if ! command -v bc > /dev/null
+then
+echo "bc puudub - paigalda see: apt install bc"
+exit 1
+fi
+if [ $# -ne 3 ]
+then
+echo "Kasutus: $0 A B C"
+exit 1
+fi
+a=$1
+b=$2
+c=$3
+for k in "$a" "$b" "$c"
+do
+if ! [[ $k =~ ^-?[0-9]*[.]?[0-9]+$ ]]
+then
+echo "Vigane kordaja '$k' - sisesta arvud"
+exit 1
+fi
+done
+if (( $(echo "$a == 0" | bc -l) ))
+then
+echo "A ei tohi olla 0 - siis pole tegu ruutvõrrandiga"
+exit 1
+fi
+# diskriminant D = B^2 - 4AC, sulud kaitsevad negatiivseid kordajaid
+d=$(echo "($b)^2 - 4*($a)*($c)" | bc -l)
+if (( $(echo "$d < 0" | bc -l) ))
+then
+echo "D = $(printf "%.5f" "$d") - reaalarvulisi lahendeid ei ole"
+elif (( $(echo "$d == 0" | bc -l) ))
+then
+x=$(echo "-($b) / (2*($a))" | bc -l)
+echo "D = 0 - üks lahend"
+printf "x = %.5f\n" "$x"
+else
+x1=$(echo "(-($b) + sqrt($d)) / (2*($a))" | bc -l)
+x2=$(echo "(-($b) - sqrt($d)) / (2*($a))" | bc -l)
+echo "D = $(printf "%.5f" "$d") - kaks lahendit"
+printf "x1 = %.5f\n" "$x1"
+printf "x2 = %.5f\n" "$x2"
+fi
