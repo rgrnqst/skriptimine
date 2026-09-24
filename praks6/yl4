@@ -37,3 +37,11 @@ then
 else
     echo "Vigane sisend - sisesta täisarv"
 fi
+
+# täiendus: 20 esimese täisarvu kontroll
+echo
+echo "20 esimest täisarvu:"
+for i in {1..20}
+do
+    kontrolli $i
+done
