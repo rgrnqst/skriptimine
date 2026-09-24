@@ -1,0 +1,22 @@
+#!/bin/bash
+# yl1 - küsib kasutaja vanust ja väljastab vanusegrupi
+echo "Sisesta (oma) vanus: "
+read vanus
+case $vanus in
+    ''|*[!0-9]*) echo "vigane sisend"; exit 1 ;;
+esac
+if test $vanus -ge 0 -a $vanus -lt 11
+then
+    echo "oled laps"
+elif test $vanus -ge 11 -a $vanus -lt 18
+then
+    echo "oled nooruk"
+elif test $vanus -ge 18 -a $vanus -lt 63
+then
+    echo "oled täiskasvanu"
+elif test $vanus -ge 63
+then
+    echo "oled senioor"
+else
+    echo "vigane sisend"
+fi
