@@ -1,0 +1,39 @@
+#!/bin/bash
+# yl4 - tuvastab while tsükliga, kas arv on algarv
+
+# funktsioon kontrollib arvu $1 ja väljastab tulemuse
+kontrolli() {
+    arv=$1
+    algarv=1
+    if test $arv -lt 2
+    then
+        algarv=0
+    fi
+    # jagamist alustatakse jagajast 2, kuni leitakse täielik jagumine
+    jagaja=2
+    while test $algarv -eq 1 -a $((jagaja * jagaja)) -le $arv
+    do
+        if test $((arv % jagaja)) -eq 0
+        then
+            algarv=0
+        fi
+        jagaja=$((jagaja + 1))
+    done
+    if test $algarv -eq 1
+    then
+        echo "$arv - on algarv"
+    else
+        echo "$arv - ei ole algarv"
+    fi
+}
+
+read -p "Sisesta suvaline arv: " sisend
+if [[ $sisend =~ ^-[0-9]+$ ]]
+then
+    echo "$sisend - ei ole algarv"
+elif [[ $sisend =~ ^[0-9]+$ ]]
+then
+    kontrolli $((10#$sisend))
+else
+    echo "Vigane sisend - sisesta täisarv"
+fi
