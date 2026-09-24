@@ -1,0 +1,27 @@
+#!/bin/bash
+# yl1 - õnnenumbrid: leiab kõik arvud vahemikus 1000-9999, mille numbrite
+# korduval kokkuliitmisel jääb lõpuks järele 7
+# arvu tekstiks ei teisendata, numbrid eraldatakse % 10 ja / 10 abil
+kokku=0
+for (( arv = 1000; arv <= 9999; arv++ ))
+do
+# algne arv jääb muutujasse arv alles, arvutame koopiaga
+summa=$arv
+# liidame numbreid seni, kuni summa on ühekohaline
+while (( summa > 9 ))
+do
+jaak=$summa
+summa=0
+while (( jaak > 0 ))
+do
+summa=$(( summa + jaak % 10 ))
+jaak=$(( jaak / 10 ))
+done
+done
+if (( summa == 7 ))
+then
+echo $arv
+kokku=$(( kokku + 1 ))
+fi
+done
+echo "Kokku leiti $kokku õnnenumbrit"
