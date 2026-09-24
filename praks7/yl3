@@ -1,0 +1,23 @@
+#!/bin/bash
+# yl3 - väljastab tühja ristküliku: tärnid ainult servades, sees tühikud
+read -p "Sisesta ridade arv: " read_arv
+read -p "Sisesta tärnide arv reas: " tarnid
+if ! [[ $read_arv =~ ^[1-9][0-9]*$ && $tarnid =~ ^[1-9][0-9]*$ ]]
+then
+    echo "Vigane sisend - sisesta positiivsed täisarvud"
+    exit 1
+fi
+for (( i = 1; i <= read_arv; i++ ))
+do
+    for (( j = 1; j <= tarnid; j++ ))
+    do
+        # esimene ja viimane rida ning esimene ja viimane veerg on tärnid
+        if test $i -eq 1 -o $i -eq $read_arv -o $j -eq 1 -o $j -eq $tarnid
+        then
+            echo -n "* "
+        else
+            echo -n "  "
+        fi
+    done
+    echo ""
+done
