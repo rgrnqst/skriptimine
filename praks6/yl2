@@ -1,0 +1,25 @@
+#!/bin/bash
+# yl2 - arvutab while tsükliga sisestatud täisarvu numbrite summa
+read -p "Sisesta suvaline täisarv: " sisend
+if ! [[ $sisend =~ ^-?[0-9]+$ ]]
+then
+    echo "Vigane sisend - sisesta täisarv"
+    exit 1
+fi
+# märk eraldi, arvutame numbrite summa arvu absoluutväärtusest
+mark=1
+arv=$sisend
+if test "${arv:0:1}" = "-"
+then
+    mark=-1
+    arv=${arv#-}
+fi
+arv=$((10#$arv))
+summa=0
+while test $arv -gt 0
+do
+    summa=$((summa + arv % 10))
+    arv=$((arv / 10))
+done
+summa=$((summa * mark))
+echo "Arvu $sisend numbrite summa on $summa"
