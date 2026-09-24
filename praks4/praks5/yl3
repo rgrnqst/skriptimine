@@ -1,0 +1,22 @@
+#!/bin/bash
+# yl3 - küsib kellaaega (tund 0-23) ja tervitab vastavalt kellaajale
+echo "Sisesta tund (0-23): "
+read tund
+case $tund in
+    ''|*[!0-9]*) echo "vigane sisend"; exit 1 ;;
+esac
+if test $tund -ge 6 -a $tund -lt 12
+then
+    echo "Tere hommikust"
+elif test $tund -ge 12 -a $tund -lt 18
+then
+    echo "Tere päevast"
+elif test $tund -ge 18 -a $tund -lt 22
+then
+    echo "Tere õhtust"
+elif test $tund -ge 22 -a $tund -le 23 || test $tund -ge 0 -a $tund -lt 6
+then
+    echo "Head ööd!"
+else
+    echo "vigane sisend"
+fi
