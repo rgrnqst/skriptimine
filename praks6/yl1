@@ -1,0 +1,11 @@
+#!/bin/bash
+# yl1 - arvutab for tsükliga paarisarvude summa vahemikus 1 kuni 10
+summa=0
+for i in {1..10}
+do
+    if test $((i % 2)) -eq 0
+    then
+        summa=$((summa + i))
+    fi
+done
+echo "Arvude vahemikus 1 kuni 10 (kaasaarvutud) paarisarvude summa on: $summa"
